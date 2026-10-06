@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "461063430823",
+    "project_id": "frutella-190f6",
+    "storage_bucket": "frutella-190f6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461063430823:android:9befbcb54bc2761e5a7182",
+        "android_client_info": {
+          "package_name": "com.example.fruit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgg3Tj8INSrkOLGWa2_4nzNijkMnjOaac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461063430823:android:387429ef356fb6e35a7182",
+        "android_client_info": {
+          "package_name": "com.example.taswek"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgg3Tj8INSrkOLGWa2_4nzNijkMnjOaac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
