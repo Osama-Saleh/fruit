@@ -20,6 +20,14 @@ class UserModel extends UserEntity {
     );
   }
 
+  factory UserModel.fromEntity(UserEntity user) {
+    return UserModel(
+      name: user.name,
+      email: user.email,
+      userId: user.userId,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -27,4 +35,5 @@ class UserModel extends UserEntity {
       'userId': userId,
     };
   }
+  
 }

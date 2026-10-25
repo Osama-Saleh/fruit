@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taswek/core/app_images/App_images.dart';
+import 'package:taswek/core/model/product_model.dart';
 import 'package:taswek/core/utils/app_colors.dart';
 import 'package:taswek/core/utils/app_text_style.dart';
 
 class FruitItem extends StatelessWidget {
-  const FruitItem({super.key});
+  final ProductModel productModel;
+  const FruitItem({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +16,38 @@ class FruitItem extends StatelessWidget {
 
       child: Stack(
         children: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
           Positioned(
             left: 0,
             right: 0,
-            child: SvgPicture.asset(
-              AppImages.imagesOnboardingOnBoardingFruit2,
-              fit: BoxFit.scaleDown,
-              width: 200,
+            child:
+                productModel.imageUrl != null &&
+                    productModel.imageUrl!.isNotEmpty
+                ? Image.network(
+                    productModel.imageUrl!,
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                    errorBuilder: (context, error, stackTrace) =>
+                        SvgPicture.asset(
+                          AppImages.imagesOnboardingOnBoardingFruit2,
+                          fit: BoxFit.scaleDown,
+                          width: 200,
+                        ),
+                  )
+                : SvgPicture.asset(
+                    AppImages.imagesOnboardingOnBoardingFruit2,
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                  ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              productModel.isOrganic ? Icons.favorite : Icons.favorite_border,
+              color: productModel.isOrganic
+                  ? AppColors.redLight
+                  : AppColors.grayLight2,
             ),
           ),
           Positioned(
@@ -34,9 +60,13 @@ class FruitItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('أناناس', style: AppTextStyles.semiBold13),
-                      Text('20جنية / الكيلو'),
+                      Text(productModel.name, style: AppTextStyles.semiBold13),
+                      Text(
+                        '${productModel.price} جنية / الكيلو',
+                        style: AppTextStyles.regular13,
+                      ),
                     ],
                   ),
                   Spacer(),

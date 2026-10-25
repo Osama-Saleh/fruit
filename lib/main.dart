@@ -6,9 +6,11 @@ import 'package:taswek/core/utils/get_it.dart';
 import 'package:taswek/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taswek/core/helper/custom_bloc_observer.dart';
+import 'package:taswek/core/services/local_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SecureStorage.instance.init();
   await LocalizeAndTranslate.init(
     assetLoader: const AssetLoaderRootBundleJson('assets/lang/'),
     supportedLanguageCodes: <String>['ar', 'en'],

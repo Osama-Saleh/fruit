@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
@@ -6,6 +7,7 @@ import 'package:taswek/core/errors/exceptions.dart';
 import 'package:taswek/core/errors/failures.dart';
 import 'package:taswek/core/services/data_base.dart';
 import 'package:taswek/core/services/firebase_auth_service.dart';
+import 'package:taswek/core/services/local_storage.dart';
 import 'package:taswek/features/auth/data/model/user_model.dart';
 import 'package:taswek/features/auth/domain/entites/user_entity.dart';
 import 'package:taswek/features/auth/domain/repos/auth_repo.dart';
@@ -64,6 +66,7 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
       );
       UserEntity userEntity = await getUserData(docId: user.uid);
+      await saveUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(message: e.message));
@@ -94,6 +97,18 @@ class AuthRepoImpl extends AuthRepo {
       throw CustomException(message: "Error getting data from firestore");
     } catch (e) {
       throw CustomException(message: "Error getting data from firestore");
+    }
+  }
+
+  @override
+  Future<dynamic> saveUserData({required UserEntity user}) async {
+    try {
+      final userModel = jsonEncode(UserModel.fromEntity(user).toJson());
+      await SecureStorage.instance.write(key: 'saveUserData', value: userModel);
+    } on CustomException catch (e) {
+      throw CustomException(message: "Error saving user data ${e.message}");
+    } catch (e) {
+      throw CustomException(message: "Error saving user data ${e.toString()}");
     }
   }
 }

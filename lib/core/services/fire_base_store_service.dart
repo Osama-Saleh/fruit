@@ -23,4 +23,10 @@ class FireBaseStoreService implements DataBaseService {
     final documentSnapshot = await db.collection(pathName).doc(docId).get();
     return documentSnapshot.data()!;
   }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllData({required String pathName}) async {
+    final querySnapshot = await db.collection(pathName).get();
+    return querySnapshot.docs.map((e) => e.data()).toList();
+  }
 }

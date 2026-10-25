@@ -7,4 +7,7 @@ abstract class DataBaseService {
     required String pathName,
     required String docId,
   });
+  Future<List<Map<String, dynamic>>> getAllData({
+    required String pathName,
+  });
 }
